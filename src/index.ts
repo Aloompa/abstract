@@ -2,15 +2,18 @@ export const abstract = (fn: Function) => {
   let mockFn = fn;
   let isMocking = false;
 
-  return {
+  const abstractResponse = {
     setMock: (mock: Function) => {
       mockFn = mock;
+      return abstractResponse;
     },
     mock: () => {
       isMocking = true;
+      return abstractResponse;
     },
     unmock: () => {
       isMocking = false;
+      return abstractResponse;
     },
     exec: (...args) => {
       if (isMocking) {
@@ -20,4 +23,6 @@ export const abstract = (fn: Function) => {
       return fn(...args);
     }
   };
+
+  return abstractResponse;
 };

@@ -42,4 +42,18 @@ describe("Abstract Sync", () => {
     expect(result.name).toEqual("Augustus Gloop");
     getPerson.unmock();
   });
+
+  it("Should chain everything but exec", () => {
+    const result = getPerson
+      .unmock()
+      .mock()
+      .setMock(id => ({
+        id,
+        name: "Augustus Gloop"
+      }))
+      .exec("1");
+
+    expect(result.id).toEqual("1");
+    expect(result.name).toEqual("Augustus Gloop");
+  });
 });
