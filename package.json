@@ -1,0 +1,41 @@
+{
+  "name": "@aloompa/abstract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest --maxWorkers=2",
+    "build": "tsc",
+    "start": "tsc --watch",
+    "release": "tsc; publish"
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.15",
+    "babel-jest": "24.5.0",
+    "jest": "24.5.0",
+    "publish": "0.6.0",
+    "ts-jest": "24.0.0",
+    "ts-loader": "5.3.3",
+    "typescript": "3.3.4000",
+    "@types/node": "^12.12.5"
+  },
+  "jest": {
+    "testURL": "http://localhost/",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "./node_modules/ts-jest",
+      ".*": "babel-jest"
+    },
+    "testRegex": "/__tests__/.*\\.(ts|tsx)$",
+    "testPathIgnorePatterns": [
+      "/lib"
+    ],
+    "collectCoverage": false
+  },
+  "author": "Aloompa",
+  "license": "MIT"
+}
