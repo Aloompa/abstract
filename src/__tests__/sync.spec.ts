@@ -56,4 +56,17 @@ describe("Abstract Sync", () => {
     expect(result.id).toEqual("1");
     expect(result.name).toEqual("Augustus Gloop");
   });
+
+  it("Should give us a hook to do something on unmock", () => {
+    let result = "no";
+    getPerson.setUnmock(() => {
+      result = "yes";
+    });
+
+    expect(result).toEqual("no");
+
+    getPerson.unmock();
+
+    expect(result).toEqual("yes");
+  });
 });

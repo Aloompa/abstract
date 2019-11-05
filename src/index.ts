@@ -1,6 +1,7 @@
 export const abstract = (fn: Function) => {
   let mockFn = fn;
   let isMocking = false;
+  let onUnmock = () => {};
 
   const abstractResponse = {
     setMock: (mock: Function) => {
@@ -13,6 +14,11 @@ export const abstract = (fn: Function) => {
     },
     unmock: () => {
       isMocking = false;
+      onUnmock();
+      return abstractResponse;
+    },
+    setUnmock: unmockFn => {
+      onUnmock = unmockFn;
       return abstractResponse;
     },
     exec: (...args) => {
