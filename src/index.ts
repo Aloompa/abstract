@@ -27,7 +27,10 @@ export const abstract = (fn: Function) => {
       }
 
       return fn(...args);
-    }
+    },
+
+    // This is meant to be overridden
+    generateMock: () => {}
   };
 
   return abstractResponse;
