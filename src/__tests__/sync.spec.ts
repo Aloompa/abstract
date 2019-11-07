@@ -61,6 +61,7 @@ describe("Abstract Sync", () => {
     let result = "no";
     getPerson.setUnmock(() => {
       result = "yes";
+      return result;
     });
 
     expect(result).toEqual("no");
@@ -68,5 +69,17 @@ describe("Abstract Sync", () => {
     getPerson.unmock();
 
     expect(result).toEqual("yes");
+  });
+
+  it("Should supply a mock generation utility", async () => {
+    getPerson.createMockGenerator(({ id }) => ({
+      id,
+      name: "Oompa-Loompa"
+    }));
+
+    const mock = getPerson.generateMock({ id: "44" });
+
+    expect(mock.name).toEqual("Oompa-Loompa");
+    expect(mock.id).toEqual("44");
   });
 });
