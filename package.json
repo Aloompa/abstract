@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "jest --maxWorkers=2",
+    "test:watch": "jest --maxWorkers=2 --watch",
     "build": "tsc",
     "start": "tsc --watch",
     "release": "tsc; publish"

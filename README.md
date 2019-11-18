@@ -44,6 +44,18 @@ getPerson.exec('1'); // { "id": "1", "name": "Grandpa Joe" }
 getPerson.unmock();
 ```
 
+### Mock All
+
+For convenience in your test initialization, you can mock all the abstract functions at once using `mockAll`. Using this function, you don't have to worry about initializing every mock for each function.
+
+```
+import { mockAll, unmockAll } from '@aloompa/abstract';
+
+mockAll(); // All the mocks are on
+
+unmockAll(); // All the mocks are off
+```
+
 ## Contributing
 
 We encourage you to contribute to Abstract by submitting bug reports and pull requests through [Github](http//github.com).
