@@ -10,7 +10,7 @@ The main abstract function takes a function as its only argument. The function t
 import { abstract } from "@aloompa/abstract";
 
 const apiCall = abstract(() => {
- // ... return something
+  // ... return something
 });
 
 apiCall.exec();
@@ -40,9 +40,9 @@ For example:
 import { abstract } from "@aloompa/abstract";
 
 const apiCall = abstract((id, firstName, lastName) => ({
- id,
- firstName,
- lastName
+  id,
+  firstName,
+  lastName
 }));
 
 apiCall.exec(1, "Willy", "Wonka"); // { id: 1, firstName: "Willy", lastName: "Wonka" }
@@ -56,11 +56,11 @@ For example, using async/await:
 import { abstract } from "@aloompa/abstract";
 
 const doAThing = async () => {
- const apiCall = abstract(() => Promise.resolve("Success"));
+  const apiCall = abstract(() => Promise.resolve("Success"));
 
- const data = await apiCall.exec();
+  const data = await apiCall.exec();
 
- return data; // "Success"
+  return data; // "Success"
 };
 ```
 
@@ -97,9 +97,9 @@ Turns on the mocking function so that `.exec()` will return the mock instead of 
 import { abstract } from "@aloompa/abstract";
 
 const apiCall = abstract(() => {
- return "Real";
+  return "Real";
 }).setMock(() => {
- return "Mocked";
+  return "Mocked";
 });
 
 apiCall.exec(); // "Real"
@@ -117,11 +117,11 @@ How you will handle this will vary depending on the public API you are mocking, 
 import { abstract } from "@aloompa/abstract";
 
 const getWidgetById = abstract(async id => {
- const [result] = await sequelize.query(
- `select * from widgets where id ${id}`
- );
+  const [result] = await sequelize.query(
+    `select * from widgets where id ${id}`
+  );
 
- return result;
+  return result;
 });
 
 getWidgetById.exec("1"); // { id: "1", name: "My Widget" }
@@ -133,15 +133,15 @@ You could add a `setMock` to your abstract chain like this:
 import { abstract } from "@aloompa/abstract";
 
 const getWidgetById = abstract(async id => {
- const [result] = await sequelize.query(
- `select * from widgets where id ${id}`
- );
- return result;
+  const [result] = await sequelize.query(
+    `select * from widgets where id ${id}`
+  );
+  return result;
 }).setMock(async id => {
- return Promise.resolve({
- id,
- name: "My Widget"
- });
+  return Promise.resolve({
+    id,
+    name: "My Widget"
+  });
 });
 
 getWidgetById.exec("1");
@@ -161,13 +161,13 @@ This is a great place to place any business logic that you want to ensure gets t
 import { abstract } from "@aloompa/abstract";
 
 const getWidgetById = abstract(({ id }) => ({
- id,
- name: "Widget1"
+  id,
+  name: "Widget1"
 }))
  // Turn the string id into an object with id
- .transformInput(id => ({
- id
- }));
+  .transformInput(id => ({
+    id
+  }));
 
 getWidgetById.exec("1");
 ```
@@ -182,14 +182,14 @@ This is a great place to place any business logic that you want to ensure gets t
 import { abstract } from "@aloompa/abstract";
 
 const getPersonById = abstract(id => ({
- id,
- firstName: "Willy",
- lastName: "Wonka"
+  id,
+  firstName: "Willy",
+  lastName: "Wonka"
 }))
  // Turn the string id into an object with id
- .transformOutput(person => ({
- ...person,
- fullName: `${person.firstName} ${person.lastName}`
+  .transformOutput(person => ({
+    ...person,
+    fullName: `${person.firstName} ${person.lastName}`
  }));
 
 getPersonById.exec("1"); // { id: "1", firstName: "Willy", lastName: "Wonka", fullName: "Willy Wonka" }
