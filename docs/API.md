@@ -190,7 +190,7 @@ const getPersonById = abstract(id => ({
   .transformOutput(person => ({
     ...person,
     fullName: `${person.firstName} ${person.lastName}`
-   }));
+  }));
 
 getPersonById.exec("1"); // { id: "1", firstName: "Willy", lastName: "Wonka", fullName: "Willy Wonka" }
 ```
