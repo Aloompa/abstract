@@ -164,7 +164,7 @@ const getWidgetById = abstract(({ id }) => ({
   id,
   name: "Widget1"
 }))
- // Turn the string id into an object with id
+  // Turn the string id into an object with id
   .transformInput(id => ({
     id
   }));
@@ -186,11 +186,11 @@ const getPersonById = abstract(id => ({
   firstName: "Willy",
   lastName: "Wonka"
 }))
- // Turn the string id into an object with id
+  // Turn the string id into an object with id
   .transformOutput(person => ({
     ...person,
     fullName: `${person.firstName} ${person.lastName}`
- }));
+   }));
 
 getPersonById.exec("1"); // { id: "1", firstName: "Willy", lastName: "Wonka", fullName: "Willy Wonka" }
 ```
