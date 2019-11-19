@@ -30,7 +30,7 @@ apiCall.exec();
 
 The abstract response provides several methods both for manipulating the input and output data and for setting up and tearing down mocks. While `exec()` is typically the only method you'll need to call outside of testing, you will find that all of these will be useful.
 
-### exec(...args) : any
+#### exec(...args) : any
 
 This is your primary function for executing your wrapped abstract function or mock. This function can accept any number of arguments and return any data type.
 
