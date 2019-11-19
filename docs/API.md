@@ -48,7 +48,7 @@ const apiCall = abstract((id, firstName, lastName) => ({
 apiCall.exec(1, "Willy", "Wonka"); // { id: 1, firstName: "Willy", lastName: "Wonka" }
 ```
 
-The main thing to keep in mind is that `.exec()` will typically be an asyncronous function if you are interacting with databases or third-party libraries. It may be used as a promise or with async/await.
+The main thing to keep in mind is that `.exec()` will typically be an asynchronous function if you are interacting with databases or third-party libraries. It may be used as a promise or with async/await.
 
 For example, using async/await:
 
@@ -68,7 +68,7 @@ Remember that `.exec()` will return either the real function or the mocked funct
 
 #### getMock() : Function
 
-Returns the currently set mocking function. This can be useful if you want to override it in a single test and then reset it to the default afterwards. To accomplish that, you simply need to save off a reference to the original function, override it and then set it back when you're done.
+Returns the currently set mocking function. This can be useful if you want to override it in a single test and then reset it to the default afterward. To accomplish that, you simply need to save off a reference to the original function, override it and then set it back when you're done.
 
 ```javascript
 import { abstract } from "@aloompa/abstract";

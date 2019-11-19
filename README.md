@@ -4,7 +4,7 @@ A tiny functional async abstraction tool.
 
 ## Why Abstract?
 
-This library is designed to wrap around your side effects to make them easily mockable and testable. Nobody wants to write unit tests that directly interact with a database or a payment processor. Abstract lets you create an _abstraction_ around your third-party and asyncronous interactions so that you can mock out the functionality in the same scope as your real API calls, (even in the same file). Then you can turn the mocks on and off as needed to create the ideal testing environment where you can test your business logic against a consistent API to what you will be exposing in a true production environment.
+This library is designed to wrap around your side effects to make them easily mockable and testable. Nobody wants to write unit tests that directly interact with a database or a payment processor. Abstract lets you create an _abstraction_ around your third-party and asynchronous interactions so that you can mock out the functionality in the same scope as your real API calls, (even in the same file). Then you can turn the mocks on and off as needed to create the ideal testing environment where you can test your business logic against a consistent API to what you expose in a true production environment.
 
 ## Installation
 
@@ -20,7 +20,7 @@ or
 import { abstract } from "@aloompa/abstract";
 
 const getPerson = abstract(async id => {
-  // ... Code to get the person from database
+  // ... Code to get the person from the database
 
   return {
     id,
@@ -52,7 +52,7 @@ Read the [Full API Docs](/docs/API.md) here.
 
 ## Typescript
 
-Abstract comes with Typescript definitions, but to make the library truly useful, you'll want to extend the Abstract interface with your own inputs and outputs.
+Abstract comes with Typescript definitions, but to make the library truly useful, you'll want to extend the Abstract interface with your inputs and outputs.
 
 ```javascript
 import { abstract, Abstract } from "@aloompa/abstract";
