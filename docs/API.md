@@ -18,16 +18,53 @@ apiCall.exec();
 
 ##### Returns
 
-- [getMock](#getMock)
-- [mock](#mock)
-- [setMock](#setMock)
-- [transformInput](#transformInput)
-- [transformOutput](#transformOutput)
-- [unmock](#unmock)
+- [exec](#exec...args--any)
+- [getMock](#getmock--function)
+- [mock](#mock--abstractobject)
+- [setMock](#setmock-function---abstractobject)
+- [transformInput](#transforminputfunction--abstractobject)
+- [transformOutput](#transformoutputfunction--abstractobject)
+- [unmock](#unmock--abstractobject)
 
 ### AbstractObject Methods
 
 The abstract response provides several methods both for manipulating the input and output data and for setting up and tearing down mocks. While `exec()` is typically the only method you'll need to call outside of testing, you will find that all of these will be useful.
+
+### exec(...args) : any
+
+This is your primary function for executing your wrapped abstract function or mock. This function can accept any number of arguments and return any data type.
+
+For example:
+
+```javascript
+import { abstract } from "@aloompa/abstract";
+
+const apiCall = abstract((id, firstName, lastName) => ({
+  id,
+  firstName,
+  lastName
+}));
+
+apiCall.exec(1, "Willy", "Wonka"); // { id: 1, firstName: "Willy", lastName: "Wonka" }
+```
+
+The main thing to keep in mind is that `.exec()` will typically be an asyncronous function if you are interacting with databases or third-party libraries. It may be used as a promise or with async/await.
+
+For example, using async/await:
+
+```javascript
+import { abstract } from "@aloompa/abstract";
+
+const doAThing = async () => {
+  const apiCall = abstract(() => Promise.resolve("Success"));
+
+  const data = await apiCall.exec();
+
+  return data; // "Success"
+};
+```
+
+Remember that `.exec()` will return either the real function or the mocked function depending on whether mocks are enabled with `.mock()` or `mockAll()`.
 
 #### getMock() : Function
 
