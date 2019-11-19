@@ -2,6 +2,10 @@
 
 A tiny functional async abstraction tool.
 
+## Why Abstract?
+
+This library is designed to wrap around your side effects to make them easily mockable and testable. Nobody wants to write unit tests that directly interact with a database or a payment processor. Abstract lets you create an _abstraction_ around your third-party and asyncronous interactions so that you can mock out the functionality in the same scope as your real API calls, (even in the same file). Then you can turn the mocks on and off as needed to create the ideal testing environment where you can test your business logic against a consistent API to what you will be exposing in a true production environment.
+
 ## Installation
 
 `npm i @aloompa/abstract -S`
@@ -10,50 +14,66 @@ or
 
 `yarn add @aloompa/abstract --save`
 
-## Usage
+## Example Usage
 
-Full API documentation is forthcoming, but here is the essential flow.
+```javascript
+import { abstract } from "@aloompa/abstract";
 
-```
-import { abstract } from '@aloompa/abstract';
+const getPerson = abstract(async id => {
+  // ... Code to get the person from database
 
-const getPerson = abstract(async (id) => {
-    // ... Code to get the person from database
-
-    return {
-        id,
-        name: 'Violet Beauregarde'
-    };
+  return {
+    id,
+    name: "Violet Beauregarde"
+  };
 });
 
-getPerson.setMock(async (id) => {
-    return {
-        id,
-        name: 'Grandpa Joe'
-    };
+getPerson.setMock(async id => {
+  return {
+    id,
+    name: "Grandpa Joe"
+  };
 });
 
 // Mock is set, but not enabled
-getPerson.exec('1'); // { "id": "1", "name": "Violet Beauregarde" }
+getPerson.exec("1"); // { "id": "1", "name": "Violet Beauregarde" }
 
 // Enable mock
 getPerson.mock();
-getPerson.exec('1'); // { "id": "1", "name": "Grandpa Joe" }
+getPerson.exec("1"); // { "id": "1", "name": "Grandpa Joe" }
 
 // Disable the mock
 getPerson.unmock();
 ```
 
-### Mock All
+## API Docs
 
-For convenience in your test initialization, you can mock all the abstract functions at once using `mockAll`. Using this function, you don't have to worry about initializing every mock for each function.
+Read the [Full API Docs](/docs/API.md) here.
 
-```
-import { mockAll, unmockAll } from '@aloompa/abstract';
+## Typescript
 
-mockAll(); // All the mocks are on
+Abstract comes with Typescript definitions, but to make the library truly useful, you'll want to extend the Abstract interface with your own inputs and outputs.
 
-unmockAll(); // All the mocks are off
+```javascript
+import { abstract, Abstract } from "@aloompa/abstract";
+
+interface PersonResult {
+  id: string;
+  name: string;
+}
+
+interface GetPersonById extends Abstract {
+  exec(id: string): Promise<PersonResult>;
+}
+
+const getPersonById: GetPersonById = abstract(async id =>
+  Promise.resolve({
+    id,
+    name: "Willy Wonka"
+  })
+);
+
+getPersonById.exec("1");
 ```
 
 ## Contributing
