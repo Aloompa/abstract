@@ -1,4 +1,5 @@
-![](/docs/logo.png)
+<img src="./docs/logo.png" alt="Abstract" width="250px"/>
+
 A tiny functional async abstraction tool.
 
 ## Why Abstract?
