@@ -18,7 +18,7 @@ apiCall.exec();
 
 ##### Returns
 
-- [exec](#exec...args--any)
+- [exec](#execargs--any)
 - [getMock](#getmock--function)
 - [mock](#mock--abstractobject)
 - [setMock](#setmock-function---abstractobject)
