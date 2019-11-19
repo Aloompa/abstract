@@ -1,5 +1,4 @@
-# Abstract
-
+![](/docs/logo.png)
 A tiny functional async abstraction tool.
 
 ## Why Abstract?
